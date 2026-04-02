@@ -83,9 +83,10 @@ async def _handle_service_unavailable_db(
     return JSONResponse(status_code=503, content=DB_SERVICE_UNAVAILABLE_JSON)
 
 
+# Produção radarexynax.com (ordem explícita) + frontends Vercel; credentials exige lista fechada (sem "*").
 _cors_mandatory = [
-    "https://radarexynax.com",
     "https://www.radarexynax.com",
+    "https://radarexynax.com",
     "https://radar-exynax-frontend.vercel.app",
     "https://radar-exynax-oficial.vercel.app",
 ]
