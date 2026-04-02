@@ -131,24 +131,18 @@ def send_complete_registration_email(user_email: str, auth_token: str) -> bool:
     params = {
         "from": from_addr,
         "to": [user_email],
-        "subject": "Complete seu cadastro no Radar Exynax",
+        "subject": "Complete your registration on Radar Exynax",
         "reply_to": reply_to,
         "html": f"""
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #0f172a; border: 1px solid #e2e8f0; padding: 25px; border-radius: 10px;">
-                <h2 style="color: #0A2463; text-align: center;">Radar Exynax</h2>
-                <p>Olá,</p>
-                <p>Não encontramos uma conta com este e-mail. Para iniciar seu cadastro, clique no botão abaixo. O link inclui uma assinatura de segurança e expira em até 72 horas.</p>
-                <div style="text-align: center; margin: 30px 0;">
+                <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.5;">Hello, To begin your registration, click the link below.</p>
+                <div style="text-align: center; margin: 24px 0;">
                     <a href="{register_url}"
                        style="background: #0A2463; color: #ffffff; padding: 15px 30px;
                        text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
-                       Completar cadastro
+                       Continue registration
                     </a>
                 </div>
-                <p style="font-size: 12px; color: #64748b;">Se você não tentou acessar o Radar Exynax, ignore este e-mail.</p>
-                <p style="font-size: 11px; color: #cbd5e1; text-align: center;">
-                    &copy; 2026 Radar Exynax
-                </p>
             </div>
         """,
     }

@@ -46,8 +46,8 @@ class ServiceUnavailableDbSync(Exception):
 
 
 DB_SERVICE_UNAVAILABLE_JSON = {
-    "error": "Serviço temporariamente indisponível - Erro de sincronização com o banco de dados",
-    "detail": "Serviço temporariamente indisponível - Erro de sincronização com o banco de dados",
+    "error": "Service temporarily unavailable",
+    "detail": "Database synchronization issue. Radar Exynax Foreign Trade Intelligence will retry shortly.",
 }
 
 
@@ -315,8 +315,7 @@ def _post_magic_link_impl(body: MagicLinkBody) -> dict:
                 "ok": True,
                 "flow": "pre_register",
                 "message": (
-                    "Usuário não encontrado. Enviamos um link para o seu e-mail "
-                    "para iniciar o cadastro."
+                    "We've sent a link to your email to begin your registration."
                 ),
             }
     token = mint_magic_token(body.email)
@@ -392,7 +391,7 @@ async def post_register(body: RegistrationBody):
             if not sub or sub != row["email"]:
                 raise HTTPException(
                     status_code=400,
-                    detail="Token de convite inválido ou não corresponde ao e-mail informado.",
+                    detail="Invitation token is invalid or does not match this email. Request a new link from Login.",
                 )
         except HTTPException:
             raise
@@ -400,7 +399,7 @@ async def post_register(body: RegistrationBody):
             print(f"[register] register_intent_token inválido: {exc!r}", flush=True)
             raise HTTPException(
                 status_code=400,
-                detail="Token de convite inválido ou expirado. Solicite um novo link em Login.",
+                detail="Invitation token is invalid or expired. Request a new link from Login.",
             ) from exc
     if not db_pg.database_url():
         raise ServiceUnavailableDbSync()
