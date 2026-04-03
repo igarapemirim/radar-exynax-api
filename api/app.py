@@ -83,7 +83,7 @@ async def _handle_service_unavailable_db(
     return JSONResponse(status_code=503, content=DB_SERVICE_UNAVAILABLE_JSON)
 
 
-# Origens do site (Origin do navegador em /login e demais páginas). Lista fechada + credentials=True.
+# CORS: obrigatório para o browser em produção (fetch a partir de /login e demais páginas).
 RADAR_EXYNAX_SITE_ORIGINS = (
     "https://www.radarexynax.com",
     "https://radarexynax.com",
